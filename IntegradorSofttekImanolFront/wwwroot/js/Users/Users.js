@@ -1,7 +1,8 @@
 ﻿var token = localStorage.getItem('token');
+console.log(token)
+
 var type = localStorage.getItem('type')
 
-console.log(type)
 
 let table = new DataTable('#usuarios', {
     paging: true, 
