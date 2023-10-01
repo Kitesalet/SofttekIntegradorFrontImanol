@@ -11,7 +11,7 @@ namespace Data.DTO
         public int CodProject { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public int State { get; set; }
+        public string State { get; set; }
 
     }
 }

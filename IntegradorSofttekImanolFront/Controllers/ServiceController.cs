@@ -68,7 +68,7 @@ namespace IntegradorSofttekImanolFront.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult CreateProject(ServiceDto service)
+        public IActionResult CreateService(ServiceDto service)
         {
             var token = HttpContext.Session.GetString("Token");
             var baseApi = new BaseApi(_httpClient);

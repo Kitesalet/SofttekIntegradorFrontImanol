@@ -1,5 +1,8 @@
 ﻿@model Data.ViewModels.ProjectViewModel
 
+@{
+}
+
 <div class="modal fade" id="projectoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -19,7 +22,7 @@
                             </div>
                             <div class="col-md-6 mt-1 mb-3">
                                 <label class="col-md-2 form-control-label">Estado</label>
-                                @Html.EditorFor(x => x.State, new { htmlAttributes = new { @class = "col-md-8 form-control", @required = "required" } })
+                                @Html.EditorFor(x => x.State, new { @class = "col-md-8 form-control", @required = "required" })
                             </div>
                         </div>
                         <div class="row">
