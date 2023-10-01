@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace IntegradorSofttekImanolFront.Controllers
 {
     [Authorize]
-    public class UserController : Controller
+    public class ServiceController : Controller
     {
 
         private readonly IHttpClientFactory _httpClient;
 
-        public UserController(IHttpClientFactory httpClient)
+        public ServiceController(IHttpClientFactory httpClient)
         {
             _httpClient = httpClient;
         }
@@ -23,67 +23,56 @@ namespace IntegradorSofttekImanolFront.Controllers
             return View();
         }
 
-        public IActionResult DeleteUser(int codUser)
+        public IActionResult DeleteService(int codService)
         {
             var token = HttpContext.Session.GetString("Token");
             var baseApi = new BaseApi(_httpClient);
 
-            var usuarios = baseApi.DeleteToApi($"user/{codUser}", new { codUser = codUser }, token);
+            var usuarios = baseApi.DeleteToApi($"service/{codService}", new { codService = codService }, token);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult UsersAddPartial(UserDto user)
+        public IActionResult ServiceAddPartial(ServiceDto service)
         {
-            if (user.CodUser != 0)
+            if (service.CodService != 0)
             {
-                if (user.Type == "Consultor")
-                {
-                    user.TypeNumber = 1;
-                }
-                else
-                {
-                    user.TypeNumber = 2;
-                }
 
-                user.Password = "***************";
-
-                var userUpdate = new UserViewModel()
+                var serviceUpdate = new ServiceViewModel()
                 {
-                    Type = user.TypeNumber,
-                    Dni = user.Dni,
-                    Name = user.Name,
-                    Password = user.Password,
-                    CodUser = user.CodUser
+                    CodService = service.CodService,
+                    Descr = service.Descr,
+                    HourValue = service.HourValue,
+                    State = service.State
                 };
 
-                return PartialView("~/Views/User/Partial/UsersAddPartial.cshtml", userUpdate);
+                return PartialView("~/Views/Service/Partial/ServiceAddPartial.cshtml", serviceUpdate);
             }
             else
             {
-                var model = new UserViewModel();
-                return PartialView("~/Views/User/Partial/UsersAddPartial.cshtml", model);
+                var model = new ServiceViewModel();
+                return PartialView("~/Views/Service/Partial/ServiceAddPartial.cshtml", model);
             }
 
 
 
         }
 
-        public IActionResult UpdateUser(UserUpdateDto user)
+        public IActionResult UpdateService(ServiceDto service)
         {
             var token = HttpContext.Session.GetString("Token");
             var baseApi = new BaseApi(_httpClient);
 
-            var usuarios = baseApi.PutToApi($"user/{user.CodUser}", user, token);
+            var usuarios = baseApi.PutToApi($"service/{service.CodService}", service, token);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult CreateUser(UserDto user)
+        public IActionResult CreateService(ServiceDto service)
         {
             var token = HttpContext.Session.GetString("Token");
             var baseApi = new BaseApi(_httpClient);
-            var usuarios = baseApi.PostToApi("users/register", user, token);
+            var services = baseApi.PostToApi("service/register", service, token);
 
             return RedirectToAction("Index");
         }

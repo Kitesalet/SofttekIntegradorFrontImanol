@@ -1,67 +1,65 @@
 ﻿var token = localStorage.getItem('token');
 var type = localStorage.getItem('type')
 
-console.log(type)
-
-let table = new DataTable('#usuarios', {
+let table = new DataTable('#services', {
     paging: true, 
     lengthMenu: [1, 5, 10, 20], 
     pageLength: 5,
     ajax: {
 
-        url: `https://localhost:7147/api/users?page=1&units=1000`,
+        url: `https://localhost:7147/api/services?page=1&units=100`,
         dataSrc: "data",
         headers: { "Authorization": "Bearer " + token }
     },
     columns: [
-        { data: 'codUser', title: 'CodUsuario' },
-        { data: 'name', title: 'Nombre' },
-        { data: 'dni', title: 'Dni' },
-        { data: 'type', title: 'Tipo' },
+        { data: 'codService', title: 'CodServicio' },
+        { data: 'descr', title: 'Descripcion' },
+        { data: 'hourValue', title: 'ValorHora' },
+        { data: 'state', title: 'Estado' },
         {
             data: function (data) {
                 var buttons =	
-                    `<td><a href='javascript:UpdateUser(${JSON.stringify(data)})'><i class="fa-solid fa-pen-to-square m-3 updateUser"></i></a></td>` +
-                    `<td><a href='javascript:DeleteUser(${JSON.stringify(data)})'><i class="fa-solid fa-trash deleteUser"></i></a></td>`;
+                    `<td><a href='javascript:UpdateService(${JSON.stringify(data)})'><i class="fa-solid fa-pen-to-square m-3 updateService"></i></a></td>` +
+                    `<td><a href='javascript:DeleteService(${JSON.stringify(data)})'><i class="fa-solid fa-trash deleteService"></i></a></td>`;
                 return buttons;
             }
         }
     ]
 });
 
-function DeleteUser(data) {
+function DeleteService(data) {
     if (type === "Consultor") {
         alert("No tiene los derechos suficientes para realizar esta acción!")
     }
-    else if (window.confirm("Estas seguro que deseas eliminar al usuario?"))
+    else if (window.confirm("Estas seguro que deseas eliminar al servicio?"))
     {
        $.ajax({
             type: "GET",
-            url: "DeleteUser",
+            url: "DeleteService",
             data: data,
             'dataType': "html",
            success: function (result) {
-               alert('Se ha eliminado el usuario! Por favor, recargue la pagina...')
+               location.reload()
             },
        })
     } else {
-        alert("No se ha eliminado al usuario!")
+        alert("No se ha eliminado el servicio!")
     }
 
 }
-function UpdateUser(data) {
+function UpdateService(data) {
     if (type === "Consultor") {
         alert("No tiene los derechos suficientes para realizar esta acción!")
     }
     else {
         $.ajax({
             type: "GET",
-            url: "UsersAddPartial",
+            url: "ServiceAddPartial",
             data: data,
             dataType: "html",
             success: function (result) {
-                $("#UsersAddPartial").html(result);
-                $('#usuarioModal').modal('show');
+                $("#ServiceAddPartial").html(result);
+                $('#servicioModal').modal('show');
             }
         });
 }
@@ -69,18 +67,18 @@ function UpdateUser(data) {
 }
 
 
-function AddUser() {
+function AddService() {
     if (type === "Consultor") {
         alert("No tiene los derechos suficientes para realizar esta acción!")
     }
     else {
         $.ajax({
             type: "GET",
-            url: "UsersAddPartial",
+            url: "ServiceAddPartial",
             'dataType': "html",
             success: function (result) {
-                $("#UsersAddPartial").html(result);
-                $('#usuarioModal').modal('show');
+                $("#ServiceAddPartial").html(result);
+                $('#servicioModal').modal('show');
             }
         })
     }
