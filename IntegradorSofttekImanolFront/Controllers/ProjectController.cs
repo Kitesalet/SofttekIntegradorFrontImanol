@@ -37,27 +37,13 @@ namespace IntegradorSofttekImanolFront.Controllers
         {
             if (project.CodProject != 0)
             {
-                int stateInt = 0;
-
-                if (project.State == "Pendiente")
-                {
-                    stateInt = 1;
-                }
-                else if (project.State == "Confirmado")
-                {
-                    stateInt = 2;
-                }
-                else
-                {
-                    stateInt = 3;
-                }
 
                 var projectUpdate = new ProjectViewModel()
                 {
                     CodProject = project.CodProject,
                     Name = project.Name,
                     Address = project.Address,
-                    State = stateInt
+                    State = project.State
                 };
 
                 return PartialView("~/Views/Project/Partial/ProjectAddPartial.cshtml", projectUpdate);
