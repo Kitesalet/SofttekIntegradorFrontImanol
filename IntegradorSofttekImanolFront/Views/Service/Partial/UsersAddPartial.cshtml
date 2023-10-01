@@ -1,0 +1,74 @@
+﻿@model Data.ViewModels.UserViewModel
+
+<div class="modal fade" id="usuarioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Alta y/o modificación de Usuarios.</h5>
+            </div>
+            @if(Model.CodUser != 0)
+            {
+                @using (Html.BeginForm("UpdateUser", "/User", FormMethod.Post))
+                {
+                    @Html.HiddenFor(e => e.CodUser)
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 mt-1 mb-3">
+                                <label class="col-md-4 form-control-label">Nombre</label>
+                                @Html.EditorFor(x=> x.Name, new {htmlAttributes = new {@class = "col-md-8 form-control" } })
+                            </div>
+                            <div class="col-md-6 mt-1 mb-3">
+                                <label class="col-md-2 form-control-label">Password</label>
+                                @Html.EditorFor(x=> x.Password, new {htmlAttributes = new {@class = "col-md-8 form-control" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-1 mb-3">
+                                <label class="col-md-2 form-control-label">Dni</label>
+                                @Html.EditorFor(x=> x.Dni, new {htmlAttributes = new {@class = "col-md-8 form-control" } })
+                            </div>
+                            <div class="col-md-6 mt-1 mb-3">
+                                <label class="col-md-2 form-control-label">Tipo</label>
+                                @Html.EditorFor(x => x.Type, new { htmlAttributes = new { @class = "col-md-8 form-control", @Value = Model.Type } })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" id="btnGuardar">Guardar</button>
+                    </div>
+                }
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="DeleteUser({ codUser: @Model.CodUser })" data-bs-dismiss="modal">Eliminar</button>
+                </div>
+            }
+            else
+            {
+                @using (Html.BeginForm("CreateUser", "/User", FormMethod.Post))
+                {
+                    ;
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 mt-1 mb-3">
+                                <label class="col-md-4 form-control-label">Nombre</label>
+                                @Html.EditorFor(x=> x.Name, new {htmlAttributes = new {@class = "col-md-8 form-control" } })
+                            </div>
+                            <div class="col-md-6 mt-1 mb-3">
+                                <label class="col-md-2 form-control-label">Password</label>
+                                @Html.EditorFor(x=> x.Password, new {htmlAttributes = new {@class = "col-md-8 form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-1 mb-3">
+                            <label class="col-md-2 form-control-label">Dni</label>
+                            @Html.EditorFor(x=> x.Dni, new {htmlAttributes = new {@class = "col-md-8 form-control" } })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" id="btnGuardar">Guardar</button>
+                    </div>
+                }
+            }        
+        </div>
+    </div>
+</div>

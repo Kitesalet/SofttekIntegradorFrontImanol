@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\Login\" />
+    <Folder Include="wwwroot\js\Home\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\5247.jpg" />
+    <None Include="wwwroot\images\bg.jpg" />
+    <None Include="wwwroot\images\oiler.jpg" />
+    <None Include="wwwroot\images\techman.jpg" />
+    <None Include="wwwroot\images\TechOilLogo.JPG" />
+    <None Include="wwwroot\js\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.3" />
+  </ItemGroup>
+
+</Project>
