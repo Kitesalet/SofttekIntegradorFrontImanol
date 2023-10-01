@@ -1,15 +1,12 @@
 ﻿@model Data.ViewModels.ProjectViewModel
 
-@{
-}
-
 <div class="modal fade" id="projectoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Alta y/o modificación de Servicios.</h5>
             </div>
-            @if(Model.CodProject != 0)
+            @if (Model.CodProject != 0)
             {
                 @using (Html.BeginForm("UpdateProject", "/project", FormMethod.Post))
                 {
@@ -22,7 +19,7 @@
                             </div>
                             <div class="col-md-6 mt-1 mb-3">
                                 <label class="col-md-2 form-control-label">Estado</label>
-                                @Html.EditorFor(x => x.State, new { @class = "col-md-8 form-control", @required = "required" })
+                                @Html.EditorFor(x => x.State, new { htmlAttributes = new { @class = "col-md-8 form-control", @required = "required" } })
                             </div>
                         </div>
                         <div class="row">
@@ -67,7 +64,7 @@
                         <button type="submit" class="btn btn-success" id="btnGuardar">Guardar</button>
                     </div>
                 }
-            }        
+            }
         </div>
     </div>
 </div>
