@@ -12,27 +12,50 @@ using System.Text.Json;
 
 namespace IntegradorSofttekImanolFront.Controllers
 {
+    /// <summary>
+    /// Represents a controller for managing user login and authentication.
+    /// </summary>
     public class LoginController : Controller
     {
         private readonly IHttpClientFactory _httpClient;
 
+        /// <summary>
+        /// Initializes a new instance of the LoginController class.
+        /// </summary>
+        /// <param name="httpClient">IHTTpClientFactory</param>
         public LoginController(IHttpClientFactory httpClient)
         {
             _httpClient = httpClient;
         }
 
-
+        /// <summary>
+        /// Displays the login view.
+        /// </summary>
+        /// <returns>The login view.</returns>
         public IActionResult Login()
         {
             return View();
         }
 
+        /// <summary>
+        /// Signs the user out and redirects to the login page.
+        /// </summary>
+        /// <returns>Redirects to the login page.</returns>
         public async Task<IActionResult> CloseSession()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Login");
         }
 
+        /// <summary>
+        /// User login by POSTing loginDto to an API.
+        /// </summary>
+        /// <param name="login">LoginDto</param>
+        /// <returns>
+        /// If successful, redirects to the home page with a user token.
+        /// |
+        /// redirects to the login page with an error message.
+        /// </returns>
         public async Task<IActionResult> Ingresar(LoginDto login)
         {
             var baseApi = new BaseApi(_httpClient);
@@ -41,7 +64,7 @@ namespace IntegradorSofttekImanolFront.Controllers
 
             var loginResult = token as OkObjectResult;
 
-            if(loginResult == null)
+            if (loginResult == null)
             {
                 ViewData["ErrorLogin"] = "Sus credenciales son incorrectas...";
                 return RedirectToAction("Login");
@@ -56,9 +79,9 @@ namespace IntegradorSofttekImanolFront.Controllers
 
             var claims = new List<Claim>();
 
-            foreach(var claim in userToken.Claims)
+            foreach (var claim in userToken.Claims)
             {
-                if(claim.Type == ClaimTypes.Role || claim.Type == ClaimTypes.Name)
+                if (claim.Type == ClaimTypes.Role || claim.Type == ClaimTypes.Name)
                 {
                     claims.Add(claim);
                 }
@@ -82,7 +105,5 @@ namespace IntegradorSofttekImanolFront.Controllers
             HttpContext.Session.SetString("Token", resultObject.Token);
             return View("~/Views/Home/Index.cshtml", resultObject);
         }
-
-
     }
 }

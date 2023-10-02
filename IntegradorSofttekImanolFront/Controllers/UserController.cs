@@ -7,22 +7,36 @@ using Microsoft.AspNetCore.Mvc;
 namespace IntegradorSofttekImanolFront.Controllers
 {
     [Authorize]
+    /// <summary>
+    /// Represents a controller for managing users.
+    /// </summary>
     public class UserController : Controller
     {
-
         private readonly IHttpClientFactory _httpClient;
 
+        /// <summary>
+        /// Initializes a new instance of the UserController class.
+        /// </summary>
+        /// <param name="httpClient">IHttpClientFactory</param>
         public UserController(IHttpClientFactory httpClient)
         {
             _httpClient = httpClient;
         }
 
+        /// <summary>
+        /// Displays the user index view.
+        /// </summary>
+        /// <returns>The user index view.</returns>
         public IActionResult Index()
         {
-
             return View();
         }
 
+        /// <summary>
+        /// Deletes a user with the specified code.
+        /// </summary>
+        /// <param name="codUser">An int.</param>
+        /// <returns>Redirects to the user index.</returns>
         public IActionResult DeleteUser(int codUser)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -33,6 +47,11 @@ namespace IntegradorSofttekImanolFront.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Displays a partial view for adding or updating a user.
+        /// </summary>
+        /// <param name="user">UserDto</param>
+        /// <returns>A partial view for adding or updating a user.</returns>
         public IActionResult UsersAddPartial(UserDto user)
         {
             if (user.CodUser != 0)
@@ -67,11 +86,13 @@ namespace IntegradorSofttekImanolFront.Controllers
                 };
                 return PartialView("~/Views/User/Partial/UsersAddPartial.cshtml", model);
             }
-
-
-
         }
 
+        /// <summary>
+        /// Updates a user with the specified details.
+        /// </summary>
+        /// <param name="user">UserUpdateDto</param>
+        /// <returns>Redirects to the user index.</returns>
         public IActionResult UpdateUser(UserUpdateDto user)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -82,6 +103,11 @@ namespace IntegradorSofttekImanolFront.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Creates a new user with the specified details.
+        /// </summary>
+        /// <param name="user">UserDto.</param>
+        /// <returns>Redirects to the user index.</returns>
         public IActionResult CreateUser(UserDto user)
         {
             var token = HttpContext.Session.GetString("Token");
@@ -90,6 +116,5 @@ namespace IntegradorSofttekImanolFront.Controllers
 
             return RedirectToAction("Index");
         }
-
     }
 }
