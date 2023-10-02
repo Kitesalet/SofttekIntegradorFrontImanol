@@ -6,7 +6,8 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Alta y/o modificación de Usuarios.</h5>
             </div>
-            @if(Model.CodUser != 0)
+
+            @if (Model.CodUser != 0)
             {
                 @using (Html.BeginForm("UpdateUser", "/User", FormMethod.Post))
                 {
@@ -15,60 +16,67 @@
                         <div class="row">
                             <div class="col-md-6 mt-1 mb-3">
                                 <label class="col-md-4 form-control-label">Nombre</label>
-                                @Html.EditorFor(x=> x.Name, new {htmlAttributes = new {@class = "col-md-8 form-control", required = "required" } })
+                                @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "col-md-8 form-control", required = "required" } })
                             </div>
                             <div class="col-md-6 mt-1 mb-3">
                                 <label class="col-md-2 form-control-label">Password</label>
-                                @Html.EditorFor(x=> x.Password, new {htmlAttributes = new {@class = "col-md-8 form-control", @required = "required" } })
+                                @Html.EditorFor(x => x.Password, new { htmlAttributes = new { @class = "col-md-8 form-control", required = "required" } })
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mt-1 mb-3">
                                 <label class="col-md-2 form-control-label">Dni</label>
-                                @Html.EditorFor(x=> x.Dni, new {htmlAttributes = new {@class = "col-md-8 form-control", @required = "required", @disabled = "disabled" } })
+                                @Html.EditorFor(x => x.Dni, new { htmlAttributes = new { @class = "col-md-8 form-control", required = "required", disabled = "disabled" } })
                             </div>
                             <div class="col-md-6 mt-1 mb-3">
-                                <label class="col-md-2 form-control-label">Tipo</label>
-                                @Html.EditorFor(x => x.Type, new { htmlAttributes = new { @class = "col-md-8 form-control", @Value = Model.Type,  @required = "required" } })
+                                <label class="col-md-2 form-control-label">Tipo de Usuario</label>
+                                @Html.DropDownListFor(x => x.Type, new SelectList(new List<SelectListItem>
+                        {
+                        new SelectListItem { Text = "Consultor", Value = "1" },
+                        new SelectListItem { Text = "Administrador", Value = "2" }
+                        }, "Value", "Text"), "Seleccione el tipo!", new { @class = "col-md-4 form-control", required = "required" })
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-success" id="btnGuardar">Guardar</button>
+                        <button type="button" class="btn btn-danger" onclick="DeleteUser({ codUser: @Model.CodUser })" data-bs-dismiss="modal">Eliminar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 }
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" onclick="DeleteUser({ codUser: @Model.CodUser })" data-bs-dismiss="modal">Eliminar</button>
-                </div>
             }
             else
             {
                 @using (Html.BeginForm("CreateUser", "/User", FormMethod.Post))
                 {
-                    ;
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 mt-1 mb-3">
                                 <label class="col-md-4 form-control-label">Nombre</label>
-                                @Html.EditorFor(x=> x.Name, new {htmlAttributes = new {@class = "col-md-8 form-control",  @required = "required" } })
+                                @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "col-md-8 form-control", required = "required" } })
                             </div>
                             <div class="col-md-6 mt-1 mb-3">
                                 <label class="col-md-2 form-control-label">Password</label>
-                                @Html.EditorFor(x=> x.Password, new {htmlAttributes = new {@class = "col-md-8 form-control",  @required = "required" } })
+                                @Html.EditorFor(x => x.Password, new { htmlAttributes = new { @class = "col-md-8 form-control", required = "required" } })
                             </div>
                         </div>
-                        <div class="col-md-6 mt-1 mb-3">
-                            <label class="col-md-2 form-control-label">Dni</label>
-                            @Html.EditorFor(x => x.Dni, new { htmlAttributes = new { @class = "col-md-8 form-control", @required = "required" } })
+                        <div class="row">
+                            <div class="col-md-6 mt-1 mb-3">
+                                <label class="col-md-2 form-control-label">Dni</label>
+                                @Html.EditorFor(x => x.Dni, new { htmlAttributes = new { @class = "col-md-8 form-control", required = "required" } })
+                            </div>
+                            <div class="col-md-6 mt-1 mb-3">
+                                <label class="col-md-2 form-control-label">Tipo de Usuario</label>
+                                @Html.EditorFor(x => x.Type, new { htmlAttributes = new { @class = "col-md-8 form-control", required = "required", disabled = "disabled" } })
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-success" id="btnGuardar">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 }
-            }        
+            }
         </div>
     </div>
 </div>
