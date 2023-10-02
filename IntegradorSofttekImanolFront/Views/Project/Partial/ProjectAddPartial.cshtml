@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Alta y/o modificación de Servicios.</h5>
             </div>
-            @if(Model.CodProject != 0)
+            @if (Model.CodProject != 0)
             {
                 @using (Html.BeginForm("UpdateProject", "/project", FormMethod.Post))
                 {
@@ -19,7 +19,12 @@
                             </div>
                             <div class="col-md-6 mt-1 mb-3">
                                 <label class="col-md-2 form-control-label">Estado</label>
-                                @Html.EditorFor(x => x.State, new { htmlAttributes = new { @class = "col-md-8 form-control", @required = "required" } })
+                                @Html.DropDownListFor(x => x.State, new SelectList(new List<SelectListItem>
+                        {
+                        new SelectListItem { Text = "Pendiente", Value = "1" },
+                        new SelectListItem { Text = "Confirmado", Value = "2" },
+                        new SelectListItem { Text = "Terminado", Value = "3" }
+                        }, "Value", "Text"), "Seleccione el estado!", new { @class = "col-md-8 form-control", @required = "required" })
                             </div>
                         </div>
                         <div class="row">
@@ -49,10 +54,6 @@
                                 <label class="col-md-4 form-control-label">Nombre</label>
                                 @Html.EditorFor(x=> x.Name, new {htmlAttributes = new {@class = "col-md-8 form-control", @required = "required" } })
                             </div>
-                            <div class="col-md-6 mt-1 mb-3">
-                                <label class="col-md-2 form-control-label">Estado</label>
-                                @Html.EditorFor(x => x.State, new { htmlAttributes = new { @class = "col-md-8 form-control", @required = "required" } })
-                            </div>
                         </div>
                         <div class="col-md-6 mt-1 mb-3">
                             <label class="col-md-2 form-control-label">Dirección</label>
@@ -64,7 +65,7 @@
                         <button type="submit" class="btn btn-success" id="btnGuardar">Guardar</button>
                     </div>
                 }
-            }        
+            }
         </div>
     </div>
 </div>

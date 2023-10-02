@@ -1,11 +1,24 @@
 ﻿<div class="container">
     <h1 class="my-4">Proyectos</h1>
 
+
     <button class="btn btn-primary mb-3" onclick="AddProject()">Agregar Proyecto</button>
+
+    <button class="btn btn-secondary mb-3" onclick="GetAll()">Obtener Todos los Servicios</button>
+
+    <div class="mb-3">
+        <label for="filterState">Filtrar por Estado:</label>
+        <select id="filterState" class="form-select">
+            <option value="1">Pendiente</option>
+            <option value="2">Confirmado</option>
+            <option value="3">Terminado</option>
+        </select>
+    </div>
 
     <div class="table-responsive">
         <table id="projects" class="table table-striped table-bordered text-center" style="width:100%"></table>
     </div>
+
 
     <div id="ProjectAddPartial"></div>
 </div>
