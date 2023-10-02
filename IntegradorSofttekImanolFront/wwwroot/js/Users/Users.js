@@ -42,7 +42,7 @@ function DeleteUser(data) {
             data: data,
             'dataType': "html",
            success: function (result) {
-               alert('Por favor, recargue la pagina...')
+               location.reload()
             },
        })
     } else {

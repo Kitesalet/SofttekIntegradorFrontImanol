@@ -63,7 +63,7 @@ namespace IntegradorSofttekImanolFront.Controllers
             var token = HttpContext.Session.GetString("Token");
             var baseApi = new BaseApi(_httpClient);
 
-            var usuarios = baseApi.PutToApi($"service/{service.CodService}", service, token);
+            var services = baseApi.PutToApi($"service/{service.CodService}", service, token);
 
             return RedirectToAction("Index");
         }

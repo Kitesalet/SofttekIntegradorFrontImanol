@@ -2,10 +2,16 @@
     <h1 class="my-4">Servicios</h1>
 
     <button class="btn btn-primary mb-3" onclick="AddService()">Agregar Servicio</button>
+    
+    <button class="btn btn-secondary mb-3" onclick="FilterState()">Obtener Servicios Activos</button>
+    
+    <button class="btn btn-secondary mb-3" onclick="GetAll()">Obtener Todos los Servicios</button>
+    
 
     <div class="table-responsive">
         <table id="services" class="table table-striped table-bordered text-center" style="width:100%"></table>
     </div>
+
 
     <div id="ServiceAddPartial"></div>
 </div>

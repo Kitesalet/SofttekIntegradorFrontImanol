@@ -61,7 +61,10 @@ namespace IntegradorSofttekImanolFront.Controllers
             }
             else
             {
-                var model = new UserViewModel();
+                var model = new UserViewModel()
+                {
+                    Type = 1
+                };
                 return PartialView("~/Views/User/Partial/UsersAddPartial.cshtml", model);
             }
 
