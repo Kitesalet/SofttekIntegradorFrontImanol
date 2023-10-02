@@ -19,7 +19,7 @@ builder.Services.AddAuthentication(options =>
 {
     config.Events.OnRedirectToLogin = context =>
     {
-        context.Response.Redirect("https://localhost:7147");
+        context.Response.Redirect(builder.Configuration["Redirection"]);
         return Task.CompletedTask;
     };
 });
